@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import dog from "../assets/dog_left_right_white.png";
 
-import { convertKey, draw, drawStatusText } from "./Player";
+import { convertKey, draw } from "./Player";
 import "./styles.scss";
 
 function NewComponent() {
-  const curFrame = 0
   const [click, setCLick] = useState(false);
   const [lastKey, setLastKey] = useState({
     prev: "",
     next: "",
   })
+
   useEffect(() => {
-    // window.addEventListener('load', () => {
     const canvas = document.getElementById('canvas1') as HTMLCanvasElement
     const ctx = canvas.getContext('2d')
     canvas.width = window.innerWidth
@@ -27,26 +26,16 @@ function NewComponent() {
         frameXXX++;
       }
       else frameXXX = 0;
-
-    }, 120)
-    console.log(a);
-
-    console.log("🚀 ~ file: testComp.tsx ~ line 12 ~ window.addEventListener ~ player")
-    // })
+    }, 100)
     return () => {
       clearInterval(a);
-      console.log(canvas);
       const key = Number(localStorage.getItem('lastKey') || 0)
       draw(ctx, canvas.width, canvas.height, key, frameXXX)
-
     }
-  }, [click, lastKey])
+  }, [click])
 
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
-      console.log("vốdisdoi");
-
-      // if (e.key !== lastKey.next) {
       switch (e.key) {
         case 'ArrowLeft':
           setLastKey({
@@ -73,7 +62,6 @@ function NewComponent() {
             prev: lastKey.next,
             next: "PRESS_DOWN"
           })
-
           localStorage.setItem('lastKey', convertKey({
             prev: lastKey.next,
             next: "PRESS_DOWN"
@@ -84,7 +72,6 @@ function NewComponent() {
             prev: lastKey.next,
             next: "PRESS_UP"
           })
-
           localStorage.setItem('lastKey', (convertKey({
             prev: lastKey.next,
             next: "PRESS_UP"
@@ -93,27 +80,11 @@ function NewComponent() {
         default:
           break;
       }
-      // }
     })
-
-    // window.addEventListener('keyup', (e) => {
-    //   console.log(e);
-    //   switch (e.key) {
-    //     case 'ArrowLeft':
-    //       setLastKey('PRESS left')
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    // })
   }, [])
 
   return (
     <div className="Game">
-      <button onClick={() => {
-
-        setCLick(!click);
-      }}>Hello</button>
       <canvas id="canvas1"></canvas>
       <img src={dog} id="dog" className="Game-logo" alt="logo" />
       {/* <h1 id="loading">Loading....</h1> */}

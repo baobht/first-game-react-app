@@ -2,7 +2,7 @@
 // import "./styles.scss";
 
 export const draw = (canvas: CanvasRenderingContext2D | null, _gameWidth: number, _gameHeight: number, key: number, curFrame: number) => {
-  // console.log("🚀 ~ file: index.tsx ~ line 5 ~ draw ~ curFrame", curFrame)
+  console.log("🚀 ~ file: index.tsx ~ line 5 ~ draw ~ curFrame", curFrame)
   const gameWidth = _gameWidth;
   const gameHeight = _gameHeight;
   const states: any[] = [];
